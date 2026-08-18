@@ -297,6 +297,24 @@ p{
   .photos{grid-template-columns:1fr}
   .photo{height:300px}
 }
+ @keyframes birthdayFall{
+
+  0%{
+    transform:translateY(-80px) rotate(-5deg);
+    opacity:0;
+  }
+
+  10%{
+    opacity:1;
+  }
+
+  100%{
+    transform:translateY(115vh) rotate(5deg);
+    opacity:.9;
+  }
+
+ }
+ 
 </style>
 </head>
 
@@ -532,11 +550,15 @@ function openLetter(){
 }
 /* Confetti */
 
+let crazyMode = false;
+let particleCount = 40;
+let crazyTimer;
+
 function confetti(){
 
   const icons=["🎉","✨","💖","⭐","🎊","🥳","💫","🫀","♥️"];
 
-  for(let i=0;i<100;i++){
+  for(let i=0;i<particleCount;i++){
 
     const c=document.createElement("div");
 
@@ -545,14 +567,13 @@ function confetti(){
     c.textContent=icons[Math.floor(Math.random()*icons.length)];
 
     c.style.left=Math.random()*100+"vw";
-    c.style.fontSize=(12+Math.random()*18)+"px";
+    c.style.fontSize=(12+Math.random()*22)+"px";
     c.style.animationDuration=(3+Math.random()*4)+"s";
     c.style.animationDelay=Math.random()*1.5+"s";
 
     document.body.appendChild(c);
 
-    setTimeout(()=>c.remove(),8000);
-
+    setTimeout(()=>c.remove(),9000);
   }
 }
 
@@ -587,29 +608,68 @@ function fireworks(){
 
 function celebrate(){
 
+  if(crazyMode) return;
+
+  crazyMode=true;
+
+  // Initial blast 💥
   confetti();
+  fireworks();
 
-  for(let i=0;i<25;i++){
+  // Happy Birthday rain ❤️
+  createBirthdayRain();
 
-    setTimeout(()=>{
+  // Continuous particles
+  crazyTimer=setInterval(()=>{
 
-      const f=document.createElement("div");
+    // Har round particles badhenge
+    particleCount += 15;
 
-      f.className="fire";
+    // Limit rakhi hai taaki phone unnecessarily slow na ho
+    if(particleCount > 250){
+      particleCount=250;
+    }
 
-      f.style.left=Math.random()*100+"vw";
-      f.style.top=Math.random()*75+"vh";
+    confetti();
+    fireworks();
 
-      document.body.appendChild(f);
-
-      setTimeout(()=>f.remove(),1100);
-
-    },i*120);
-
-  }
+  },2000);
 
 }
+ function createBirthdayRain(){
 
+  setInterval(()=>{
+
+    const text=document.createElement("div");
+
+    text.textContent="HAPPY BIRTHDAY KANHAIYA ❤️";
+
+    text.style.position="fixed";
+    text.style.top="-60px";
+    text.style.left=Math.random()*100+"vw";
+    text.style.zIndex="95";
+    text.style.pointerEvents="none";
+    text.style.whiteSpace="nowrap";
+
+    text.style.fontSize=(14+Math.random()*12)+"px";
+    text.style.fontWeight="900";
+    text.style.letterSpacing="2px";
+
+    text.style.textShadow=
+      "0 0 8px #ff0080, 0 0 20px #00eaff";
+
+    text.style.animation=
+      "birthdayFall "+(4+Math.random()*4)+"s linear forwards";
+
+    document.body.appendChild(text);
+
+    setTimeout(()=>{
+      text.remove();
+    },9000);
+
+  },450);
+
+ }
 </script>
 
 </body>
