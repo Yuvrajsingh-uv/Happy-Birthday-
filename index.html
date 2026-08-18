@@ -504,14 +504,19 @@ function openLetter(){
   document.getElementById("message").classList.remove("hidden");
   document.getElementById("env").textContent="💖";
 
+  const music1 = document.getElementById("music");
+  const music2 = document.getElementById("music2");
+
+  music1.pause();
+  music2.currentTime = 0;
+  music2.play();
+
 }
-
-
 /* Confetti */
 
 function confetti(){
 
-  const icons=["🎉","✨","💖","⭐","🎊","🥳","💫"];
+  const icons=["🎉","✨","💖","⭐","🎊","🥳","💫" "🫀","♥️"];
 
   for(let i=0;i<100;i++){
 
