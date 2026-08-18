@@ -289,7 +289,6 @@ p{
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<button class="music" onclick="toggleMusic()" id="musicBtn">🔇</button>
 
 
 <!-- INTRO -->
@@ -305,12 +304,13 @@ p{
     <div class="big">KANHAIYA 👀</div>
 
     <p>
-      Aaj kuch normal nahi hone wala...<br>
-      Lekin surprise dekhne ke liye<br>
-      tumhe ek kaam karna padega 😈
+  ⚠️ Ye koi normal birthday wish nahi hai…<br>
+  Aage badhne se pehle soch lo,<br>
+  kyunki ek baar shuru hua…<br>
+  <strong>toh surprise rukega nahi. 👀</strong>
     </p>
 
-    <button class="btn" onclick="start()">DON'T CLICK 😈</button>
+    <button class="btn" onclick="start()" id="startBtn">🚨 LAST WARNING… TAP TO CONTINUE</button>
 
   </div>
 
@@ -441,15 +441,21 @@ for(let i=0;i<110;i++){
 /* Start */
 
 function start(){
+function start(){
 
   document.getElementById("intro").classList.add("hidden");
   document.getElementById("main").classList.remove("hidden");
 
-  const music=document.getElementById("music");
+  const music = document.getElementById("music");
+  const btn = document.getElementById("startBtn");
 
   music.play().then(()=>{
-    document.getElementById("musicBtn").textContent="🔊";
-  }).catch(()=>{});
+    btn.textContent = "🔊 MUSIC ON";
+    btn.onclick = toggleMusic;
+  }).catch(()=>{
+    btn.textContent = "🔊 MUSIC ON";
+    btn.onclick = toggleMusic;
+  });
 
   fireworks();
   setTimeout(confetti,500);
@@ -460,22 +466,21 @@ function start(){
 
 function toggleMusic(){
 
-  const music=document.getElementById("music");
-  const btn=document.getElementById("musicBtn");
+  const music = document.getElementById("music");
+  const btn = document.getElementById("startBtn");
 
   if(music.paused){
 
     music.play();
-    btn.textContent="🔊";
+    btn.textContent = "🔊 MUSIC ON";
 
   }else{
 
     music.pause();
-    btn.textContent="🔇";
+    btn.textContent = "🔇 MUSIC OFF";
 
   }
 }
-
 
 /* Letter */
 
