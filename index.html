@@ -287,7 +287,7 @@ p{
 </style>
 </head>
 
-<body>
+<body oncontextmenu="return false">
 
 <div class="bg"></div>
 <div class="stars" id="stars"></div>
@@ -437,6 +437,20 @@ p{
 
 
 <script>
+  /* Disable text selection */
+*{
+  user-select:none;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+}
+
+/* Disable image dragging */
+img{
+  -webkit-user-drag:none;
+  user-drag:none;
+  pointer-events:none;
+}
 
 /* Stars */
 
