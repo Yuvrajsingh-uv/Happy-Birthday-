@@ -2,674 +2,1395 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#08000f">
-<title>For Kanhaiya ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Mystery 🎂</title>
 
 <style>
-  *{
-  user-select:none;
-  -webkit-user-select:none;
-  -moz-user-select:none;
-  -ms-user-select:none;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-/* Disable image dragging */
-img{
-  -webkit-user-drag:none;
-  user-drag:none;
-  pointer-events:none;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-
-html,body{
-  width:100%;
-  min-height:100%;
-  font-family:Arial,sans-serif;
-  background:#07000d;
-  color:#fff;
-  overflow-x:hidden;
-}
-
-body{min-height:100vh}
-
-.bg{
-  position:fixed;
-  inset:0;
-  z-index:-3;
-  background:
-    radial-gradient(circle at 20% 20%,#ff008833,transparent 28%),
-    radial-gradient(circle at 80% 30%,#00eaff22,transparent 30%),
-    radial-gradient(circle at 50% 90%,#7b00ff33,transparent 35%),
-    #07000d;
-}
-
-.stars{
-  position:fixed;
-  inset:0;
-  z-index:-2;
-  pointer-events:none;
-}
-
-.star{
-  position:absolute;
-  width:2px;
-  height:2px;
-  background:white;
-  border-radius:50%;
-  box-shadow:0 0 8px white;
-  animation:twinkle 2s infinite alternate;
-}
-
-@keyframes twinkle{
-  from{opacity:.15;transform:scale(.5)}
-  to{opacity:1;transform:scale(1.5)}
+body{
+    min-height:100vh;
+    overflow:hidden;
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+      radial-gradient(circle at top,#29105c,#090018 45%,#020006);
+    color:white;
 }
 
 .screen{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:25px;
+    position:absolute;
+    inset:0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:25px;
+    overflow:hidden;
 }
 
-.card{
-  width:min(560px,100%);
-  text-align:center;
-  padding:42px 25px;
-  border:1px solid #ffffff22;
-  border-radius:32px;
-  background:#ffffff0b;
-  backdrop-filter:blur(18px);
-  box-shadow:0 0 60px #ff008022;
+.screen.active{
+    display:flex;
 }
 
-.mini{
-  font-size:11px;
-  letter-spacing:4px;
-  color:#bbb;
+.content{
+    width:min(900px,95%);
+    position:relative;
+    z-index:20;
 }
 
-.big{
-  font-size:clamp(40px,12vw,72px);
-  margin:18px 0;
-  font-weight:900;
-  background:linear-gradient(90deg,#ff38bd,#fff,#37eaff,#ff38bd);
-  background-size:300%;
-  -webkit-background-clip:text;
-  color:transparent;
-  animation:gradient 4s linear infinite;
+.neon{
+    color:#fff;
+    text-shadow:
+      0 0 5px #fff,
+      0 0 15px #ff00ff,
+      0 0 30px #ff00ff,
+      0 0 60px #ff00ff;
 }
 
-  .nor{
-  font-size:clamp(40px,12vw,72px);
-  margin:18px 0;
-  font-weight:900;
-  
-  }
-  
-@keyframes gradient{
-  to{background-position:300%}
+h1{
+    font-size:clamp(2rem,8vw,5rem);
+    margin-bottom:20px;
 }
 
-.emoji{
-  font-size:75px;
-  animation:float 2s infinite alternate;
-}
-
-@keyframes float{
-  to{transform:translateY(-14px) rotate(5deg)}
+h2{
+    font-size:clamp(1.7rem,6vw,3.5rem);
+    margin-bottom:18px;
 }
 
 p{
-  color:#ddd;
-  line-height:1.8;
+    font-size:clamp(1rem,4vw,1.4rem);
+    line-height:1.7;
 }
 
-.btn{
-  margin-top:28px;
-  border:0;
-  padding:16px 30px;
-  border-radius:50px;
-  color:white;
-  font-weight:bold;
-  font-size:15px;
-  cursor:pointer;
-  background:linear-gradient(90deg,#ff0080,#7b2cff,#00c6ff);
-  background-size:200%;
-  box-shadow:0 0 30px #ff008055;
-  animation:btn 2s infinite alternate;
+button{
+    border:2px solid #fff;
+    color:#fff;
+    background:rgba(255,255,255,.08);
+    padding:16px 30px;
+    border-radius:50px;
+    font-size:1rem;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:30px;
+    box-shadow:
+      0 0 10px #ff00ff,
+      0 0 25px #ff00ff,
+      inset 0 0 10px rgba(255,0,255,.2);
+    transition:.3s;
 }
 
-@keyframes btn{
-  to{
-    background-position:100%;
-    transform:scale(1.05);
-  }
+button:hover{
+    transform:scale(1.08);
+    background:#ff00aa;
+    box-shadow:
+      0 0 15px #fff,
+      0 0 40px #ff00aa,
+      0 0 80px #ff00aa;
 }
 
-.hidden{display:none!important}
+.small{
+    font-size:.9rem;
+    opacity:.7;
+    margin-top:15px;
+}
 
-/* Birthday */
+.heart{
+    position:absolute;
+    animation:float 6s linear infinite;
+    opacity:.7;
+    z-index:2;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(110vh) rotate(0deg);
+    }
+    to{
+        transform:translateY(-120px) rotate(360deg);
+    }
+}
+
+/* ================= SCREEN 1 ================= */
+
+#screen1{
+    background:
+      radial-gradient(circle,#240047,#05000d 65%);
+}
+
+.ready{
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.03)}
+}
+
+/* ================= SCREEN 2 ================= */
+
+#screen2{
+    background:
+      linear-gradient(135deg,#10002c,#330044,#080014);
+}
+
+.dear{
+    color:#ff8dfd;
+    font-size:clamp(1.4rem,5vw,2.5rem);
+    margin-top:10px;
+    text-shadow:0 0 20px #ff00ff;
+}
+
+/* ================= SCREEN 3 ================= */
+
+#screen3{
+    background:
+      radial-gradient(circle at center,#6b005f,#15001e 55%,#030006);
+}
 
 .birthday{
-  text-align:center;
-  width:min(900px,100%);
+    animation:birthdayGlow 1s infinite alternate;
 }
 
-.cake{
-  font-size:100px;
-  animation:float 1.7s infinite alternate;
+@keyframes birthdayGlow{
+    from{
+        transform:scale(1);
+        text-shadow:0 0 10px #fff,0 0 30px #ff00bb;
+    }
+    to{
+        transform:scale(1.05);
+        text-shadow:0 0 20px #fff,0 0 50px #ff00bb,0 0 90px #ff0066;
+    }
 }
 
-.title{
-  font-size:clamp(48px,13vw,90px);
-  font-weight:1000;
-  line-height:.9;
-  margin:20px 0;
-  text-shadow:0 0 15px #ff0080,0 0 45px #ff0080;
+.rainEmoji{
+    position:absolute;
+    top:-50px;
+    animation:emojiFall linear forwards;
+    z-index:10;
+    pointer-events:none;
 }
 
-.name{
-  font-size:clamp(35px,10vw,65px);
-  font-weight:900;
-  color:#fff;
-  text-shadow:0 0 15px #00eaff,0 0 35px #00eaff;
+@keyframes emojiFall{
+    to{
+        transform:translateY(115vh) rotate(720deg);
+    }
 }
 
-/* Gallery */
+/* ================= SCREEN 4 ================= */
 
-.gallery{
-  width:min(900px,100%);
-  margin:35px auto;
+#screen4{
+    background:
+      radial-gradient(circle at top,#30145c,#09000f);
 }
 
-.gallery h2{
-  font-size:32px;
-  margin-bottom:20px;
+.shayariBox{
+    max-width:750px;
+    margin:auto;
+    padding:35px 25px;
+    border:1px solid rgba(255,255,255,.4);
+    border-radius:25px;
+    background:rgba(255,255,255,.06);
+    box-shadow:0 0 40px rgba(255,0,200,.3);
 }
 
-.photos{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
+.shayari{
+    font-size:clamp(1.15rem,4vw,1.6rem);
+    line-height:2;
+    color:#ffd9fb;
 }
 
-.photo{
-  height:230px;
-  overflow:hidden;
-  border-radius:22px;
-  border:1px solid #ffffff33;
-  box-shadow:0 0 25px #ff008022;
-  transform:rotate(var(--r));
-  transition:.4s;
+/* ================= SCREEN 5 ================= */
+
+#screen5{
+    background:radial-gradient(circle,#001e36,#02000b 65%);
 }
 
-.photo:hover{
-  transform:scale(1.04) rotate(0deg);
-  box-shadow:0 0 35px #00eaff55;
+.memoryCard{
+    padding:35px;
+    border-radius:25px;
+    background:rgba(0,0,0,.4);
+    border:1px solid #00d9ff;
+    box-shadow:0 0 40px #008cff;
 }
 
-.photo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
+.lock{
+    font-size:5rem;
+    animation:shake 1.5s infinite;
 }
 
-/* Letter */
+@keyframes shake{
+    0%,100%{transform:rotate(0)}
+    25%{transform:rotate(-8deg)}
+    75%{transform:rotate(8deg)}
+}
 
-.letter{
-  margin:45px auto;
-  width:min(600px,100%);
-  padding:30px;
-  border-radius:25px;
-  background:#ffffff0b;
-  border:1px solid #ffffff22;
+/* ================= SCREEN 6 ================= */
+
+#screen6{
+    background:radial-gradient(circle,#102600,#020700 65%);
+}
+
+.puzzle{
+    display:grid;
+    grid-template-columns:repeat(2,120px);
+    gap:8px;
+    justify-content:center;
+    margin:25px auto;
+}
+
+.piece{
+    height:120px;
+    width:120px;
+    border:2px solid white;
+    background-size:240px 240px;
+    cursor:pointer;
+    border-radius:10px;
+    transition:.3s;
+}
+
+.piece:hover{
+    transform:scale(1.05);
+}
+
+.piece.selected{
+    border:4px solid #00ffcc;
+    box-shadow:0 0 25px #00ffcc;
+}
+
+/* ================= SCREEN 7 ================= */
+
+#screen7{
+    background:radial-gradient(circle,#321300,#090300);
 }
 
 .envelope{
-  font-size:70px;
-  cursor:pointer;
-  animation:float 2s infinite alternate;
+    font-size:7rem;
+    cursor:pointer;
+    animation:envelopePulse 1.5s infinite;
 }
 
-.message{
-  margin-top:20px;
-  font-size:16px;
-  line-height:1.9;
-  color:#eee;
+@keyframes envelopePulse{
+    50%{transform:scale(1.08)}
 }
 
-/* Music */
-
-.music{
-  position:fixed;
-  right:18px;
-  top:18px;
-  z-index:50;
-  width:48px;
-  height:48px;
-  border-radius:50%;
-  border:1px solid #ffffff33;
-  background:#ffffff12;
-  color:white;
-  cursor:pointer;
-  backdrop-filter:blur(10px);
+.letter{
+    display:none;
+    max-height:55vh;
+    overflow:auto;
+    padding:25px;
+    margin-top:20px;
+    border-radius:20px;
+    background:rgba(255,255,255,.08);
+    border:1px solid #ffbb55;
+    box-shadow:0 0 30px #ff8800;
+    text-align:left;
 }
 
-/* Confetti */
+.letter.show{
+    display:block;
+}
+
+/* ================= SCREEN 8 ================= */
+
+#screen8{
+    background:radial-gradient(circle,#250033,#050008);
+}
+
+.gallery{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:15px;
+    margin-top:25px;
+}
+
+.gallery img{
+    width:140px;
+    height:170px;
+    object-fit:cover;
+    border-radius:15px;
+    border:2px solid white;
+    box-shadow:0 0 20px #ff00cc;
+    transition:.4s;
+}
+
+.gallery img:hover{
+    transform:scale(1.1) rotate(2deg);
+}
+
+/* ================= SCREEN 9 ================= */
+
+#screen9{
+    background:radial-gradient(circle,#001d35,#00040a);
+}
+
+.codeInput{
+    margin-top:25px;
+    padding:15px;
+    width:min(300px,90%);
+    border-radius:30px;
+    border:2px solid #00d9ff;
+    background:#020b12;
+    color:white;
+    text-align:center;
+    font-size:1.2rem;
+    outline:none;
+    box-shadow:0 0 20px #00d9ff;
+}
+
+/* ================= FINAL ================= */
+
+#screen10{
+    background:#000;
+}
+
+.finalTitle{
+    font-size:clamp(2.5rem,10vw,6rem);
+    animation:finalGlow 1s infinite alternate;
+}
+
+@keyframes finalGlow{
+    from{
+        text-shadow:0 0 10px #fff,0 0 30px #ff00cc;
+    }
+    to{
+        text-shadow:0 0 20px #fff,0 0 60px #ff00cc,0 0 100px #ff0066;
+    }
+}
+
+.firework{
+    position:absolute;
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:white;
+    animation:explode 1.5s ease-out forwards;
+}
+
+@keyframes explode{
+    0%{
+        transform:scale(1);
+        opacity:1;
+    }
+    100%{
+        transform:
+          translate(var(--x),var(--y))
+          scale(.1);
+        opacity:0;
+    }
+}
 
 .confetti{
-  position:fixed;
-  top:-30px;
-  z-index:100;
-  pointer-events:none;
-  animation:fall linear forwards;
+    position:absolute;
+    width:10px;
+    height:18px;
+    top:-30px;
+    animation:confettiFall linear forwards;
 }
 
-@keyframes fall{
-  to{
-    transform:translateY(110vh) rotate(720deg);
-  }
+@keyframes confettiFall{
+    to{
+        transform:translateY(110vh) rotate(720deg);
+    }
 }
 
-/* Firework */
+/* mobile */
 
-.fire{
-  position:fixed;
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:white;
-  z-index:90;
-  box-shadow:0 0 15px #fff,0 0 35px #ff00cc;
-  animation:boom 1s forwards;
+@media(max-width:500px){
+    .puzzle{
+        grid-template-columns:repeat(2,100px);
+    }
+
+    .piece{
+        width:100px;
+        height:100px;
+        background-size:200px 200px;
+    }
+
+    .gallery img{
+        width:110px;
+        height:140px;
+    }
+
+    button{
+        padding:14px 24px;
+    }
 }
-
-@keyframes boom{
-  0%{transform:scale(1);opacity:1}
-  100%{transform:scale(20);opacity:0}
-}
-
-@media(max-width:600px){
-  .photos{grid-template-columns:1fr}
-  .photo{height:300px}
-}
- @keyframes birthdayFall{
-
-  0%{
-    transform:translateY(-80px) rotate(-5deg);
-    opacity:0;
-  }
-
-  10%{
-    opacity:1;
-  }
-
-  100%{
-    transform:translateY(115vh) rotate(5deg);
-    opacity:.9;
-  }
-
- }
- 
 </style>
 </head>
 
-<body oncontextmenu="return false">
+<body>
 
-<div class="bg"></div>
-<div class="stars" id="stars"></div>
-
-<audio id="music" loop>
-  <source src="music.mp3" type="audio/mpeg">
+<!-- MUSIC -->
+<audio id="music1" loop>
+    <source src="song1.mp3" type="audio/mpeg">
 </audio>
 
 <audio id="music2" loop>
-  <source src="music2.mp3" type="audio/mpeg">
+    <source src="song2.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="music3" loop>
+    <source src="song3.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="music4" loop>
+    <source src="song4.mp3" type="audio/mpeg">
 </audio>
 
 
-<!-- INTRO -->
+<!-- ================= SCREEN 1 ================= -->
 
-<section class="screen" id="intro">
+<section class="screen active" id="screen1">
 
-  <div class="card">
+    <div class="content ready">
 
-    <div class="emoji">🎁</div>
+        <div style="font-size:4rem;">🎁</div>
 
-    <div class="mini">A SECRET SURPRISE FOR</div>
+        <h1 class="neon">
+            ARE YOU READY?
+        </h1>
 
-    <div class="big">KANHAIYA </div>
-      <div class="nor">🫀 </div> 
+        <p>
+            For something a little different... 👀
+        </p>
 
-    <p>
-  ⚠️ <br>
-  Aage badhne se pehle soch lo,<br>
-  kyunki ek baar shuru hua…<br>
-  <strong>toh surprise rukega nahi. 👀</strong>
-    </p>
+        <p class="small">
+            This isn't an ordinary birthday wish.
+        </p>
 
-    <button class="btn" onclick="start()" id="startBtn">🚨 LAST WARNING… TAP TO CONTINUE</button>
+        <button onclick="goTo(2,1)">
+            START THE SURPRISE 🚀
+        </button>
 
-  </div>
+    </div>
 
 </section>
 
 
-<!-- MAIN -->
+<!-- ================= SCREEN 2 ================= -->
 
-<section class="screen hidden" id="main">
+<section class="screen" id="screen2">
 
-  <div class="birthday">
+    <div class="content">
 
-    <div class="cake">🎂</div>
+        <div style="font-size:4rem;">🎂</div>
 
-    <div class="mini">THE WAIT IS OVER ✨</div>
+        <h1 class="neon">
+            YUVRAJ
+        </h1>
 
-    <div class="title">
-      HAPPY<br>BIRTHDAY
-    </div>
+        <h2>
+            WISHING YOU
+            <br>
+            HAPPY BIRTHDAY 🎉
+        </h2>
 
-    <div class="name">
-      KANHAIYA ❤️
-    </div>
-
-    <p style="margin-top:20px">
-      Aaj ka din sirf tumhare naam. 🥳<br>
-      Smile karte rehna, kyunki aaj<br>
-      celebration rukne wala nahi hai! ✨
-    </p>
-
-
-    <!-- PHOTOS -->
-
-    <div class="gallery">
-
-      <h2>📸 Some Beautiful Memories</h2>
-
-      <div class="photos">
-
-        <div class="photo" style="--r:-2deg">
-          <img src="photo1.jpg" alt="Memory 1">
+        <div class="dear">
+            Dear Vartika ❤️
         </div>
 
-        <div class="photo" style="--r:2deg">
-          <img src="photo2.jpg" alt="Memory 2">
-        </div>
+        <p style="margin-top:20px;">
+            I have something waiting for you...
+        </p>
 
-        <div class="photo" style="--r:2deg">
-          <img src="photo3.jpg" alt="Memory 3">
-        </div>
-
-        <div class="photo" style="--r:-2deg">
-          <img src="photo4.jpg" alt="Memory 4">
-        </div>
-
-      </div>
+        <button onclick="goTo(3,2)">
+            CLICK HERE 👀
+        </button>
 
     </div>
 
+</section>
 
-    <!-- SECRET LETTER -->
 
-    <div class="letter">
+<!-- ================= SCREEN 3 ================= -->
 
-      <div class="mini">ONE LAST BUT NOT LEAST SURPRISE 💌</div>
+<section class="screen" id="screen3">
 
-      <div class="envelope" onclick="openLetter()" id="env">
-        💌
-      </div>
+    <div class="content">
 
-      <div class="message hidden" id="message">
+        <div style="font-size:3rem;">
+            🎂 🎉 🥳 ❤️
+        </div>
 
-  <strong>Dear Kanhaiya ❤️</strong>
+        <h1 class="birthday">
+            HAPPY BIRTHDAY
+            <br>
+            VARTIKA
+        </h1>
 
-  <br><br>
+        <p>
+            Today is officially your day! ✨
+        </p>
 
-  Har saal zindagi ek naya safha kholti hai,
-  aur dua hai ki tumhari kahaani ka har agla safha
-  pichhle se bhi zyada khoobsurat ho. ✨
+        <p style="font-size:1rem;">
+            🌸 💖 🎂 🥳 🎈 ✨ 💕 🌹 🎉
+        </p>
 
-  <br><br>
+        <button onclick="goTo(4,3)">
+            SPECIAL FOR YOU 💌
+        </button>
 
-  Waqt chahe kitna bhi badale,<br>
-  tumhare chehre ki ye muskaan kabhi kam na ho,<br>
-  tumhari har khwahish ko manzil mile,<br>
-  aur har mod par tumhe kisi baat ka gam na ho . ❤️
+    </div>
 
-  <br><br>
+</section>
 
-  Kuch log zindagi mein sirf ek saal aur badhne ke liye nahi,
-  balki zindagi ko thoda aur khoobsurat banane ke liye aate hain…
-  
-<br>
-  <strong>tum unhi khoobsurat logon mein se ek ho. ✨</strong>
+
+<!-- ================= SCREEN 4 ================= -->
+
+<section class="screen" id="screen4">
+
+    <div class="content">
+
+        <h2 class="neon">
+            SPECIAL FOR YOU 💌
+        </h2>
+
+        <div class="shayariBox">
+
+            <p class="shayari" id="shayariText"></p>
+
+        </div>
+
+        <button onclick="goTo(5,4)">
+            READ NEXT ❤️
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SCREEN 5 ================= -->
+
+<section class="screen" id="screen5">
+
+    <div class="content">
+
+        <div class="memoryCard">
+
+            <div class="lock">
+                🔐
+            </div>
+
+            <h2 class="neon">
+                SECRET MEMORY
+            </h2>
+
+            <p>
+                There's something hidden inside this lock...
+            </p>
+
+            <p class="small">
+                Only the birthday girl can unlock it 😏
+            </p>
+
+            <button onclick="unlockMemory()">
+                UNLOCK 🔓
+            </button>
+
+            <div id="memoryResult"></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SCREEN 6 ================= -->
+
+<section class="screen" id="screen6">
+
+    <div class="content">
+
+        <h2 class="neon">
+            LITTLE PUZZLE 🧩
+        </h2>
+
+        <p>
+            Before the next surprise...
+            <br>
+            solve this little puzzle 😈
+        </p>
+
+        <div class="puzzle">
+
+            <div class="piece"
+                 data-pos="0"
+                 onclick="selectPiece(this)"
+                 style="background-image:url('photo1.jpg');background-position:0 0;">
+            </div>
+
+            <div class="piece"
+                 data-pos="1"
+                 onclick="selectPiece(this)"
+                 style="background-image:url('photo1.jpg');background-position:100% 0;">
+            </div>
+
+            <div class="piece"
+                 data-pos="2"
+                 onclick="selectPiece(this)"
+                 style="background-image:url('photo1.jpg');background-position:0 100%;">
+            </div>
+
+            <div class="piece"
+                 data-pos="3"
+                 onclick="selectPiece(this)"
+                 style="background-image:url('photo1.jpg');background-position:100% 100%;">
+            </div>
+
+        </div>
+
+        <p id="puzzleMessage" class="small">
+            Click two pieces to swap them 👀
+        </p>
+
+        <button onclick="skipPuzzle()" style="margin-top:15px;">
+            I'M TOO CURIOUS 😭
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SCREEN 7 ================= -->
+
+<section class="screen" id="screen7">
+
+    <div class="content">
+
+        <h2 class="neon">
+            A LETTER FOR YOU 💌
+        </h2>
+
+        <p>
+            This one is a little more personal...
+        </p>
+
+        <div class="envelope" onclick="openLetter()">
+            ✉️
+        </div>
+
+        <p>
+            TAP THE ENVELOPE
+        </p>
+
+        <div class="letter" id="letter">
+
+            <h3 style="margin-bottom:15px;">
+                Dear Vartika ❤️
+            </h3>
+
+            <p>
+                Kuch log zindagi mein bas aate nahi,
+                balki apni ek alag si jagah bana jaate hain.
+                ✨
+                <br><br>
+
+                Aaj tumhara birthday hai,
+                isliye socha ek normal sa “Happy Birthday”
+                bolkar kaise ruk jaaun? 😌
+                <br><br>
+
+                Bas itni si dua hai ki tumhari smile kabhi
+                kam na ho, tumhare sapne hamesha bade rahein,
+                aur har naya saal tumhare liye aur khoobsurat
+                surprises lekar aaye. ❤️
+                <br><br>
+
+                Aur haan...
+                ye surprise abhi khatam nahi hua. 😈
+                <br><br>
+
+                — Yuvraj ❤️
+            </p>
+
+        </div>
+
+        <button onclick="goTo(8,4)">
+            MEMORIES 📸
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SCREEN 8 ================= -->
+
+<section class="screen" id="screen8">
+
+    <div class="content">
+
+        <h2 class="neon">
+            MEMORIES UNLOCKED 📸
+        </h2>
+
+        <p>
+            Some moments deserve to be remembered forever. ❤️
+        </p>
+
+        <div class="gallery">
+
+            <img src="photo1.jpg" alt="Memory 1">
+
+            <img src="photo2.jpg" alt="Memory 2">
+
+            <img src="photo3.jpg" alt="Memory 3">
+
+            <img src="photo4.jpg" alt="Memory 4">
+
+        </div>
+
+        <button onclick="goTo(9,4)">
+            ONE LAST SECRET 🔐
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SCREEN 9 ================= -->
+
+<section class="screen" id="screen9">
+
+    <div class="content">
+
+        <div style="font-size:4rem;">
+            🔐
+        </div>
+
+        <h2 class="neon">
+            FINAL SECRET CODE
+        </h2>
+
+        <p>
+            You've come this far...
+            <br>
+            Now unlock the final surprise. 👀
+        </p>
+
+        <input
+            id="codeInput"
+            class="codeInput"
+            placeholder="ENTER CODE"
+            autocomplete="off"
+        >
+
         <br>
-        MAY MAHAKAL ALWAYS BLESS YOU 🙏🏻 
 
-  <br><br>
+        <button onclick="checkCode()">
+            UNLOCK 🔓
+        </button>
 
-  <strong>Happy Birthday, Kanhaiya! 🎂🥳</strong>
+        <p id="codeMessage" class="small"></p>
 
-</div>
+        <p class="small">
+            Hint: birthday girl's special day 🎂
+        </p>
+
     </div>
 
+</section>
 
-    <button class="btn" onclick="celebrate()">
-      🎆 MAKE IT CRAZY!
-    </button>
 
-  </div>
+<!-- ================= FINAL SCREEN ================= -->
+
+<section class="screen" id="screen10">
+
+    <div class="content">
+
+        <div style="font-size:4rem;">
+            🎉
+        </div>
+
+        <h1 class="finalTitle">
+            HAPPY BIRTHDAY
+            <br>
+            VARTIKA ❤️
+        </h1>
+
+        <p>
+            🎂 🥳 🎉 💖 ✨ 🎈 🌸 💕
+        </p>
+
+        <p style="margin-top:25px;">
+            This wasn't just a website...
+            <br>
+            It was a little journey made specially for you. ❤️
+        </p>
+
+        <p style="margin-top:20px;">
+            — Yuvraj ✨
+        </p>
+
+    </div>
 
 </section>
 
 
 <script>
-  /* Disable text selection */
 
+/* =====================================================
+   MUSIC SYSTEM
+===================================================== */
 
-/* Stars */
+const musics = {
+    1: document.getElementById("music1"),
+    2: document.getElementById("music2"),
+    3: document.getElementById("music3"),
+    4: document.getElementById("music4")
+};
 
-const stars=document.getElementById("stars");
+function playMusic(number){
 
-for(let i=0;i<110;i++){
+    Object.values(musics).forEach(audio => {
+        audio.pause();
+        audio.currentTime = 0;
+    });
 
-  const s=document.createElement("div");
-
-  s.className="star";
-
-  s.style.left=Math.random()*100+"%";
-  s.style.top=Math.random()*100+"%";
-  s.style.animationDelay=Math.random()*2+"s";
-
-  stars.appendChild(s);
+    if(musics[number]){
+        musics[number].play().catch(() => {
+            console.log("Music waiting for user interaction.");
+        });
+    }
 }
 
 
-/* Start */
+/* =====================================================
+   SCREEN NAVIGATION
+===================================================== */
 
-function start(){
+function goTo(number,musicNumber){
 
-  document.getElementById("intro").classList.add("hidden");
-  document.getElementById("main").classList.remove("hidden");
+    document.querySelectorAll(".screen").forEach(screen=>{
+        screen.classList.remove("active");
+    });
 
-  const music = document.getElementById("music");
-  const btn = document.getElementById("startBtn");
+    const next = document.getElementById("screen"+number);
 
-  music.play().then(()=>{
-    btn.textContent = "🔊 MUSIC ON";
-    btn.onclick = toggleMusic;
-  }).catch(()=>{
-    btn.textContent = "🔊 MUSIC ON";
-    btn.onclick = toggleMusic;
-  });
+    if(next){
+        next.classList.add("active");
+    }
 
-  fireworks();
-  setTimeout(confetti,500);
-}
-  
+    if(musicNumber){
+        playMusic(musicNumber);
+    }
 
+    createBackgroundHearts();
 
-/* Music */
+    if(number === 3){
+        startEmojiRain();
+    }
 
-function toggleMusic(){
+    if(number === 4){
+        startShayari();
+    }
 
-  const music = document.getElementById("music");
-  const btn = document.getElementById("startBtn");
-
-  if(music.paused){
-
-    music.play();
-    btn.textContent = "🔊 MUSIC ON";
-
-  }else{
-
-    music.pause();
-    btn.textContent = "🔇 MUSIC OFF";
-
-  }
+    if(number === 10){
+        startFinalCelebration();
+        playMusic(4);
+    }
 }
 
-/* Letter */
+
+/* =====================================================
+   FLOATING HEARTS
+===================================================== */
+
+function createBackgroundHearts(){
+
+    const emojis = ["❤️","💖","💕","✨","🌸","💗"];
+
+    for(let i=0;i<12;i++){
+
+        const heart = document.createElement("div");
+
+        heart.className = "heart";
+
+        heart.innerText =
+            emojis[Math.floor(Math.random()*emojis.length)];
+
+        heart.style.left =
+            Math.random()*100+"%";
+
+        heart.style.fontSize =
+            (15+Math.random()*25)+"px";
+
+        heart.style.animationDuration =
+            (5+Math.random()*5)+"s";
+
+        heart.style.animationDelay =
+            Math.random()*3+"s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(()=>{
+            heart.remove();
+        },10000);
+    }
+}
+
+
+/* =====================================================
+   EMOJI RAIN - 10+ SECOND
+===================================================== */
+
+let emojiRainTimer;
+
+function startEmojiRain(){
+
+    clearInterval(emojiRainTimer);
+
+    const emojis = [
+        "🎂","🎉","🥳","❤️","💖",
+        "💕","✨","🎈","🌸","🌹",
+        "💗","💝","🎊","😍","🥰"
+    ];
+
+    const startTime = Date.now();
+
+    emojiRainTimer = setInterval(()=>{
+
+        if(Date.now()-startTime > 12000){
+
+            clearInterval(emojiRainTimer);
+            return;
+        }
+
+        for(let i=0;i<5;i++){
+
+            const emoji = document.createElement("div");
+
+            emoji.className = "rainEmoji";
+
+            emoji.innerText =
+                emojis[Math.floor(Math.random()*emojis.length)];
+
+            emoji.style.left =
+                Math.random()*100+"%";
+
+            emoji.style.fontSize =
+                (20+Math.random()*35)+"px";
+
+            emoji.style.animationDuration =
+                (3+Math.random()*4)+"s";
+
+            document.body.appendChild(emoji);
+
+            setTimeout(()=>{
+                emoji.remove();
+            },8000);
+        }
+
+    },350);
+}
+
+
+/* =====================================================
+   SHAYARI TYPEWRITER
+===================================================== */
+
+function startShayari(){
+
+    const text =
+`Kuch pal hote hain jo dil ke kareeb ho jaate hain,
+Kuch log bina kahe hi khaas ho jaate hain... ❤️
+
+Aaj tumhara birthday hai,
+toh bas itni si dua hai...
+
+Har subah tumhare chehre par muskaan laaye,
+Har shaam tumhare liye khushiyan laaye,
+Aur zindagi ka har ek naya mod
+tumhe tumhari khushi ke aur kareeb le jaaye. ✨
+
+Happy Birthday Vartika 🎂❤️
+
+— Yuvraj`;
+
+    const box = document.getElementById("shayariText");
+
+    box.innerHTML = "";
+
+    let index = 0;
+
+    function type(){
+
+        if(index < text.length){
+
+            box.innerHTML +=
+                text[index] === "\n"
+                ? "<br>"
+                : text[index];
+
+            index++;
+
+            setTimeout(type,35);
+        }
+    }
+
+    type();
+}
+
+
+/* =====================================================
+   MEMORY UNLOCK
+===================================================== */
+
+function unlockMemory(){
+
+    const result =
+        document.getElementById("memoryResult");
+
+    result.innerHTML = `
+        <div style="
+            margin-top:25px;
+            font-size:3rem;
+        ">
+            🎁
+        </div>
+
+        <h3 style="
+            margin-top:10px;
+            color:#ff9cff;
+        ">
+            YOU FOUND IT! 😍
+        </h3>
+
+        <p style="margin-top:10px;">
+            But wait...
+            this was only the beginning. 😈
+        </p>
+
+        <button onclick="goTo(6,4)">
+            NEXT LEVEL 🧩
+        </button>
+    `;
+
+}
+
+
+/* =====================================================
+   PUZZLE
+===================================================== */
+
+let selectedPiece = null;
+
+function selectPiece(piece){
+
+    if(!selectedPiece){
+
+        selectedPiece = piece;
+
+        piece.classList.add("selected");
+
+        return;
+    }
+
+    if(selectedPiece === piece){
+
+        piece.classList.remove("selected");
+
+        selectedPiece = null;
+
+        return;
+    }
+
+    const firstPos =
+        selectedPiece.dataset.pos;
+
+    const secondPos =
+        piece.dataset.pos;
+
+    selectedPiece.dataset.pos = secondPos;
+    piece.dataset.pos = firstPos;
+
+    selectedPiece.classList.remove("selected");
+
+    selectedPiece = null;
+
+    checkPuzzle();
+}
+
+
+function checkPuzzle(){
+
+    const pieces =
+        document.querySelectorAll(".piece");
+
+    let correct = true;
+
+    pieces.forEach((piece,index)=>{
+
+        if(Number(piece.dataset.pos)!==index){
+            correct = false;
+        }
+
+    });
+
+    if(correct){
+
+        document.getElementById("puzzleMessage").innerHTML =
+            "🎉 PUZZLE COMPLETE! You did it! ❤️";
+
+        setTimeout(()=>{
+            goTo(7,4);
+        },1800);
+    }
+}
+
+
+function skipPuzzle(){
+
+    document.getElementById("puzzleMessage").innerHTML =
+        "Okay okay 😂 curiosity wins!";
+
+    setTimeout(()=>{
+        goTo(7,4);
+    },1000);
+}
+
+
+/* =====================================================
+   LETTER
+===================================================== */
 
 function openLetter(){
 
-  document.getElementById("message").classList.remove("hidden");
-  document.getElementById("env").textContent="💖";
+    const letter =
+        document.getElementById("letter");
 
-  const music1 = document.getElementById("music");
-  const music2 = document.getElementById("music2");
+    letter.classList.add("show");
 
-  music1.pause();
-  music2.currentTime = 0;
-  music2.play();
-
-}
-/* Confetti */
-
-let crazyMode = false;
-let particleCount = 40;
-let crazyTimer;
-
-function confetti(){
-
-  const icons=["🎉","✨","💖","⭐","🎊","🥳","💫","🫀","♥️"];
-
-  for(let i=0;i<particleCount;i++){
-
-    const c=document.createElement("div");
-
-    c.className="confetti";
-
-    c.textContent=icons[Math.floor(Math.random()*icons.length)];
-
-    c.style.left=Math.random()*100+"vw";
-    c.style.fontSize=(12+Math.random()*22)+"px";
-    c.style.animationDuration=(3+Math.random()*4)+"s";
-    c.style.animationDelay=Math.random()*1.5+"s";
-
-    document.body.appendChild(c);
-
-    setTimeout(()=>c.remove(),9000);
-  }
+    letter.scrollIntoView({
+        behavior:"smooth"
+    });
 }
 
 
-/* Fireworks */
+/* =====================================================
+   SECRET CODE
+===================================================== */
 
-function fireworks(){
+function checkCode(){
 
-  for(let i=0;i<14;i++){
+    const input =
+        document.getElementById("codeInput");
 
-    setTimeout(()=>{
+    const message =
+        document.getElementById("codeMessage");
 
-      const f=document.createElement("div");
+    const code =
+        input.value.trim().toLowerCase();
 
-      f.className="fire";
+    /*
+       Yahan apna secret code change kar sakte ho.
+       Current codes:
+       vartika
+       birthday
+       1908
+       18august
+    */
 
-      f.style.left=(5+Math.random()*90)+"vw";
-      f.style.top=(10+Math.random()*55)+"vh";
+    const correctCodes = [
+        "vartika",
+        "birthday",
+        "1908",
+        "18august",
+        "happybirthday"
+    ];
 
-      document.body.appendChild(f);
+    if(correctCodes.includes(code)){
 
-      setTimeout(()=>f.remove(),1100);
+        message.innerHTML =
+            "🔓 ACCESS GRANTED!";
 
-    },i*180);
+        message.style.color =
+            "#00ff99";
 
-  }
+        setTimeout(()=>{
+            goTo(10,4);
+        },1200);
 
+    }else{
+
+        message.innerHTML =
+            "❌ Wrong code... Try again 😈";
+
+        message.style.color =
+            "#ff5555";
+
+        input.value = "";
+
+    }
 }
 
 
-/* Crazy celebration */
+/* =====================================================
+   FINAL CELEBRATION
+===================================================== */
 
-function celebrate(){
+function startFinalCelebration(){
 
-  if(crazyMode) return;
+    document.body.style.overflow = "hidden";
 
-  crazyMode=true;
+    /* Fireworks repeatedly */
 
-  // Initial blast 💥
-  confetti();
-  fireworks();
+    for(let i=0;i<15;i++){
 
-  // Happy Birthday rain ❤️
-  createBirthdayRain();
-
-  // Continuous particles
-  crazyTimer=setInterval(()=>{
-
-    // Har round particles badhenge
-    particleCount += 15;
-
-    // Limit rakhi hai taaki phone unnecessarily slow na ho
-    if(particleCount > 250){
-      particleCount=250;
+        setTimeout(()=>{
+            createFirework(
+                Math.random()*window.innerWidth,
+                Math.random()*window.innerHeight*.7
+            );
+        },i*350);
     }
 
-    confetti();
-    fireworks();
+    /* Confetti */
 
-  },2000);
+    for(let i=0;i<150;i++){
+
+        setTimeout(()=>{
+            createConfetti();
+        },Math.random()*5000);
+    }
 
 }
- function createBirthdayRain(){
 
-  setInterval(()=>{
 
-    const text=document.createElement("div");
+/* =====================================================
+   FIREWORK
+===================================================== */
 
-    text.textContent="HAPPY BIRTHDAY KANHAIYA ❤️";
+function createFirework(x,y){
 
-    text.style.position="fixed";
-    text.style.top="-60px";
-    text.style.left=Math.random()*100+"vw";
-    text.style.zIndex="95";
-    text.style.pointerEvents="none";
-    text.style.whiteSpace="nowrap";
+    for(let i=0;i<30;i++){
 
-    text.style.fontSize=(14+Math.random()*12)+"px";
-    text.style.fontWeight="900";
-    text.style.letterSpacing="2px";
+        const fire =
+            document.createElement("div");
 
-    text.style.textShadow=
-      "0 0 8px #ff0080, 0 0 20px #00eaff";
+        fire.className = "firework";
 
-    text.style.animation=
-      "birthdayFall "+(4+Math.random()*4)+"s linear forwards";
+        fire.style.left = x+"px";
+        fire.style.top = y+"px";
 
-    document.body.appendChild(text);
+        const angle =
+            Math.random()*Math.PI*2;
+
+        const distance =
+            50+Math.random()*180;
+
+        fire.style.setProperty(
+            "--x",
+            Math.cos(angle)*distance+"px"
+        );
+
+        fire.style.setProperty(
+            "--y",
+            Math.sin(angle)*distance+"px"
+        );
+
+        document.body.appendChild(fire);
+
+        setTimeout(()=>{
+            fire.remove();
+        },1600);
+    }
+}
+
+
+/* =====================================================
+   CONFETTI
+===================================================== */
+
+function createConfetti(){
+
+    const confetti =
+        document.createElement("div");
+
+    confetti.className = "confetti";
+
+    const symbols = [
+        "🎉","🎊","❤️","💖",
+        "✨","🎂","🎈","🌸"
+    ];
+
+    confetti.innerText =
+        symbols[
+            Math.floor(Math.random()*symbols.length)
+        ];
+
+    confetti.style.left =
+        Math.random()*100+"%";
+
+    confetti.style.fontSize =
+        (15+Math.random()*25)+"px";
+
+    confetti.style.animationDuration =
+        (3+Math.random()*5)+"s";
+
+    document.body.appendChild(confetti);
 
     setTimeout(()=>{
-      text.remove();
+        confetti.remove();
     },9000);
+}
 
-  },450);
 
- }
+/* =====================================================
+   INITIAL BACKGROUND
+===================================================== */
+
+createBackgroundHearts();
+
+
+/* =====================================================
+   SECRET EASTER EGG
+===================================================== */
+
+let clickCount = 0;
+
+document.addEventListener("click",()=>{
+
+    clickCount++;
+
+    if(clickCount === 15){
+
+        const secret =
+            document.createElement("div");
+
+        secret.innerHTML =
+            "😈 You found a secret Easter Egg!";
+
+        secret.style.position="fixed";
+        secret.style.bottom="20px";
+        secret.style.left="50%";
+        secret.style.transform="translateX(-50%)";
+        secret.style.padding="15px 25px";
+        secret.style.background="rgba(0,0,0,.9)";
+        secret.style.border="1px solid #ff00ff";
+        secret.style.borderRadius="30px";
+        secret.style.zIndex="9999";
+        secret.style.boxShadow="0 0 30px #ff00ff";
+
+        document.body.appendChild(secret);
+
+        setTimeout(()=>{
+            secret.remove();
+        },4000);
+
+    }
+
+});
+
 </script>
 
 </body>
