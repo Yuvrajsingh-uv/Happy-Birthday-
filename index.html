@@ -1967,7 +1967,39 @@ function checkCode(){
     }
 }
 
+/* =====================================================
+   MUSIC EXPERIENCE
+===================================================== */
 
+function startMusicExperience(){
+
+    // Screen 12 open karo
+    document.querySelectorAll(".screen").forEach(screen=>{
+        screen.classList.remove("active");
+    });
+
+    document.getElementById("screen12").classList.add("active");
+
+    // Pehle sab music band
+    Object.values(musics).forEach(audio=>{
+        audio.pause();
+        audio.currentTime = 0;
+    });
+
+    // Music 5 start
+    const music = musics[5];
+
+    if(music){
+        music.currentTime = 0;
+
+        music.play().catch(()=>{
+            console.log("Music waiting for user interaction.");
+        });
+    }
+
+    // Hearts effect
+    createBackgroundHearts();
+}
 /* =====================================================
    FINAL CELEBRATION
 ===================================================== */
