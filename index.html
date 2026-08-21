@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -424,8 +424,92 @@ button:hover{
 
     button{
         padding:14px 24px;
+   
     }
+   /* ===== BIRTHDAY VAULT ===== */
+
+#vaultBoxes{
+    display:grid;
+    grid-template-columns:repeat(3,90px);
+    gap:12px;
+    justify-content:center;
+    margin:25px auto;
 }
+
+.vaultBox{
+    width:90px;
+    height:90px;
+    border:2px solid #00d9ff;
+    border-radius:18px;
+    background:rgba(0,20,40,.8);
+    color:white;
+    font-size:2rem;
+    cursor:pointer;
+    box-shadow:0 0 15px rgba(0,217,255,.3);
+    transition:.25s;
+}
+
+.vaultBox:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 30px #00d9ff;
+}
+
+.vaultBox.wrong{
+    animation:shakeBox .3s;
+    border-color:#ff3355;
+    box-shadow:0 0 25px #ff3355;
+}
+
+.vaultBox.correct{
+    border-color:#00ff99;
+    box-shadow:0 0 40px #00ff99;
+    transform:scale(1.12);
+}
+
+@keyframes shakeBox{
+    0%,100%{transform:translateX(0)}
+    25%{transform:translateX(-8px)}
+    75%{transform:translateX(8px)}
+}
+
+#memoryButtons{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:20px;
+}
+
+.memoryButton{
+    width:65px;
+    height:65px;
+    border-radius:18px;
+    border:2px solid white;
+    background:rgba(255,255,255,.08);
+    font-size:1.8rem;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.memoryButton:active{
+    transform:scale(.85);
+    box-shadow:0 0 30px #ff00cc;
+}
+
+@media(max-width:500px){
+
+    #vaultBoxes{
+        grid-template-columns:repeat(3,75px);
+        gap:10px;
+    }
+
+    .vaultBox{
+        width:75px;
+        height:75px;
+    }
+
+}
+
 </style>
 </head>
 
@@ -597,56 +681,85 @@ button:hover{
 
     <div class="content">
 
+        <div style="font-size:3.5rem;">🔐</div>
+
         <h2 class="neon">
-            LITTLE PUZZLE 🧩
+            BIRTHDAY VAULT 🔥
         </h2>
 
         <p>
-            Before the next surprise...
+            Hmm... next surprise locked hai 😈
             <br>
-            solve this little puzzle 😈
+            Pehle prove karo ki tum worthy ho 👀
         </p>
 
-        <div class="puzzle">
+        <div id="vaultGame">
 
-            <div class="piece"
-                 data-pos="0"
-                 onclick="selectPiece(this)"
-                 style="background-image:url('photo1.jpg');background-position:0 0;">
-            </div>
+            <h3 style="margin-top:25px;">
+                LEVEL 1 — FIND THE CAKE 🎂
+            </h3>
 
-            <div class="piece"
-                 data-pos="1"
-                 onclick="selectPiece(this)"
-                 style="background-image:url('photo1.jpg');background-position:100% 0;">
-            </div>
+            <p class="small">
+                9 boxes me se ek ke andar birthday key hai.
+                <br>
+                Find it! 😈
+            </p>
 
-            <div class="piece"
-                 data-pos="2"
-                 onclick="selectPiece(this)"
-                 style="background-image:url('photo1.jpg');background-position:0 100%;">
-            </div>
+            <div id="vaultBoxes"></div>
 
-            <div class="piece"
-                 data-pos="3"
-                 onclick="selectPiece(this)"
-                 style="background-image:url('photo1.jpg');background-position:100% 100%;">
-            </div>
+            <p id="vaultMessage" class="small">
+                Choose one... 👀
+            </p>
 
         </div>
 
-        <p id="puzzleMessage" class="small">
-            Click two pieces to swap them 👀
-        </p>
+        <div id="memoryGame" style="display:none;">
 
-        <button onclick="skipPuzzle()" style="margin-top:15px;">
-            I'M TOO CURIOUS 😭
-        </button>
+            <h3>
+                LEVEL 2 — MEMORY TEST 🧠
+            </h3>
+
+            <p class="small">
+                Sequence ko dhyan se dekho...
+                <br>
+                phir same order me repeat karo 😈
+            </p>
+
+            <div id="sequenceDisplay"
+                 style="font-size:2.5rem;margin:25px;">
+            </div>
+
+            <div id="memoryButtons"></div>
+
+            <p id="memoryMessage" class="small"></p>
+
+        </div>
+
+        <div id="vaultComplete" style="display:none;">
+
+            <div style="font-size:5rem;">
+                🔓🎉
+            </div>
+
+            <h2 class="neon">
+                VAULT CRACKED!
+            </h2>
+
+            <p>
+                Damn! Tumne kar hi diya 😂❤️
+                <br>
+                Secret room unlocked...
+            </p>
+
+            <button onclick="goTo(7,4)">
+                ENTER SECRET ROOM 💌
+            </button>
+
+        </div>
 
     </div>
 
 </section>
-
 
 <!-- ================= SCREEN 7 ================= -->
 
@@ -892,6 +1005,9 @@ function goTo(number,musicNumber){
     if(number === 4){
         startShayari();
     }
+   if(number === 6){
+    startVaultGame();
+   }
 
     if(number === 10){
         startFinalCelebration();
@@ -1069,87 +1185,274 @@ function unlockMemory(){
 
 }
 
-
 /* =====================================================
-   PUZZLE
+   BIRTHDAY VAULT GAME
 ===================================================== */
 
-let selectedPiece = null;
+let cakePosition = 0;
+let memorySequence = [];
+let playerSequence = [];
+let memoryLocked = true;
 
-function selectPiece(piece){
 
-    if(!selectedPiece){
+/* ================= LEVEL 1 ================= */
 
-        selectedPiece = piece;
+function startVaultGame(){
 
-        piece.classList.add("selected");
+    const container =
+        document.getElementById("vaultBoxes");
 
-        return;
+    container.innerHTML = "";
+
+    cakePosition =
+        Math.floor(Math.random() * 9);
+
+    for(let i=0;i<9;i++){
+
+        const box =
+            document.createElement("button");
+
+        box.className = "vaultBox";
+        box.innerText = "❓";
+
+        box.onclick = function(){
+
+            if(i === cakePosition){
+
+                box.innerText = "🎂";
+                box.classList.add("correct");
+
+                document.getElementById("vaultMessage")
+                    .innerHTML =
+                    "🎯 YESSS! Birthday key mil gayi! 🔥";
+
+                setTimeout(()=>{
+                    startMemoryGame();
+                },1200);
+
+            }else{
+
+                box.classList.add("wrong");
+
+                document.getElementById("vaultMessage")
+                    .innerHTML =
+                    "😂 Nope! Ye fake box tha... try again 😈";
+
+                setTimeout(()=>{
+                    box.classList.remove("wrong");
+                },400);
+
+            }
+
+        };
+
+        container.appendChild(box);
     }
-
-    if(selectedPiece === piece){
-
-        piece.classList.remove("selected");
-
-        selectedPiece = null;
-
-        return;
-    }
-
-    const firstPos =
-        selectedPiece.dataset.pos;
-
-    const secondPos =
-        piece.dataset.pos;
-
-    selectedPiece.dataset.pos = secondPos;
-    piece.dataset.pos = firstPos;
-
-    selectedPiece.classList.remove("selected");
-
-    selectedPiece = null;
-
-    checkPuzzle();
 }
 
 
-function checkPuzzle(){
+/* ================= LEVEL 2 ================= */
 
-    const pieces =
-        document.querySelectorAll(".piece");
+function startMemoryGame(){
 
-    let correct = true;
+    document.getElementById("vaultGame")
+        .style.display="none";
 
-    pieces.forEach((piece,index)=>{
+    document.getElementById("memoryGame")
+        .style.display="block";
 
-        if(Number(piece.dataset.pos)!==index){
-            correct = false;
-        }
+    const emojis =
+        ["❤️","🎂","⭐","🌸"];
+
+    memorySequence=[];
+
+    for(let i=0;i<4;i++){
+
+        memorySequence.push(
+            emojis[
+                Math.floor(
+                    Math.random()*emojis.length
+                )
+            ]
+        );
+
+    }
+
+    playerSequence=[];
+
+    memoryLocked=true;
+
+    showSequence();
+}
+
+
+/* ================= SHOW SEQUENCE ================= */
+
+function showSequence(){
+
+    const display =
+        document.getElementById("sequenceDisplay");
+
+    display.innerHTML =
+        "👀 WATCH CAREFULLY...";
+
+    setTimeout(()=>{
+
+        let index=0;
+
+        const timer =
+            setInterval(()=>{
+
+                if(index >= memorySequence.length){
+
+                    clearInterval(timer);
+
+                    display.innerHTML =
+                        "YOUR TURN 😈";
+
+                    memoryLocked=false;
+
+                    document.getElementById(
+                        "memoryMessage"
+                    ).innerHTML =
+                        "Repeat the sequence!";
+
+                    return;
+                }
+
+                display.innerHTML =
+                    memorySequence[index];
+
+                index++;
+
+            },800);
+
+    },1000);
+
+}
+
+
+/* ================= PLAYER INPUT ================= */
+
+function memoryClick(symbol,button){
+
+    if(memoryLocked) return;
+
+    playerSequence.push(symbol);
+
+    button.style.transform="scale(1.2)";
+
+    setTimeout(()=>{
+        button.style.transform="";
+    },150);
+
+    const currentIndex =
+        playerSequence.length-1;
+
+    if(
+        playerSequence[currentIndex]
+        !==
+        memorySequence[currentIndex]
+    ){
+
+        document.getElementById(
+            "memoryMessage"
+        ).innerHTML =
+            "💀 WRONG! Memory failed 😂";
+
+        memoryLocked=true;
+
+        setTimeout(()=>{
+            startMemoryGame();
+        },1000);
+
+        return;
+    }
+
+    if(
+        playerSequence.length
+        ===
+        memorySequence.length
+    ){
+
+        memoryLocked=true;
+
+        document.getElementById(
+            "sequenceDisplay"
+        ).innerHTML =
+            "🔓 ACCESS GRANTED!";
+
+        document.getElementById(
+            "memoryMessage"
+        ).innerHTML =
+            "🔥 DAMN! You cracked the vault!";
+
+        setTimeout(()=>{
+
+            document.getElementById(
+                "memoryGame"
+            ).style.display="none";
+
+            document.getElementById(
+                "vaultComplete"
+            ).style.display="block";
+
+            createBackgroundHearts();
+
+        },1200);
+
+    }
+
+}
+
+
+/* ================= MEMORY BUTTONS ================= */
+
+function createMemoryButtons(){
+
+    const container =
+        document.getElementById(
+            "memoryButtons"
+        );
+
+    container.innerHTML="";
+
+    const emojis =
+        ["❤️","🎂","⭐","🌸"];
+
+    emojis.forEach(symbol=>{
+
+        const button =
+            document.createElement("button");
+
+        button.className =
+            "memoryButton";
+
+        button.innerText=symbol;
+
+        button.onclick=()=>{
+            memoryClick(symbol,button);
+        };
+
+        container.appendChild(button);
 
     });
 
-    if(correct){
-
-        document.getElementById("puzzleMessage").innerHTML =
-            "🎉 PUZZLE COMPLETE! You did it! ❤️";
-
-        setTimeout(()=>{
-            goTo(7,4);
-        },1800);
-    }
 }
 
 
-function skipPuzzle(){
+/* ================= START MEMORY ================= */
 
-    document.getElementById("puzzleMessage").innerHTML =
-        "Okay okay 😂 curiosity wins!";
+const originalStartMemoryGame =
+    startMemoryGame;
 
-    setTimeout(()=>{
-        goTo(7,4);
-    },1000);
-}
+startMemoryGame=function(){
 
+    originalStartMemoryGame();
+
+    createMemoryButtons();
+
+};
 
 /* =====================================================
    LETTER
