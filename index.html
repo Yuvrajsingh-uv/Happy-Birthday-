@@ -509,6 +509,332 @@ button:hover{
     }
 
 }
+   /* ================= MUSIC INTRO SCREEN ================= */
+
+#screen11{
+    background:
+        radial-gradient(circle at center,#26004d,#08000f 60%,#000);
+}
+
+.musicIntro{
+    width:min(750px,95%);
+    padding:45px 25px;
+    text-align:center;
+    position:relative;
+    z-index:20;
+}
+
+.musicIcon{
+    font-size:5rem;
+    animation:headphoneFloat 2s infinite ease-in-out;
+    filter:drop-shadow(0 0 20px #00eaff);
+}
+
+@keyframes headphoneFloat{
+    0%,100%{
+        transform:translateY(0) rotate(-3deg);
+    }
+    50%{
+        transform:translateY(-15px) rotate(3deg);
+    }
+}
+
+.musicTitle{
+    margin-top:20px;
+    font-size:clamp(2.2rem,8vw,5rem);
+    background:linear-gradient(
+        90deg,
+        #ff00cc,
+        #ffffff,
+        #00eaff,
+        #ff00cc
+    );
+    background-size:300%;
+    -webkit-background-clip:text;
+    color:transparent;
+    animation:musicGradient 4s linear infinite;
+}
+
+@keyframes musicGradient{
+    to{
+        background-position:300%;
+    }
+}
+
+.musicText{
+    margin-top:20px;
+    color:#ddd;
+}
+
+.headphoneBox{
+    margin:25px auto 0;
+    width:min(550px,100%);
+    padding:20px;
+    border:1px solid #00eaff;
+    border-radius:20px;
+    background:rgba(0,234,255,.07);
+    box-shadow:
+        0 0 20px rgba(0,234,255,.3),
+        inset 0 0 20px rgba(0,234,255,.05);
+    line-height:1.8;
+    font-size:clamp(.95rem,3vw,1.2rem);
+}
+
+.headphoneBox span{
+    color:#aaa;
+    font-size:.9rem;
+}
+
+
+/* ================= FULL MUSIC EXPERIENCE ================= */
+
+#screen12{
+    background:
+        radial-gradient(circle at center,#16002e,#020006 60%,#000);
+    overflow:hidden;
+}
+
+.musicExperience{
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    z-index:20;
+}
+
+.musicExperience h1{
+    font-size:clamp(2rem,9vw,5rem);
+    letter-spacing:5px;
+    animation:musicTextGlow 1.5s infinite alternate;
+}
+
+@keyframes musicTextGlow{
+    from{
+        text-shadow:
+            0 0 10px #fff,
+            0 0 30px #ff00cc;
+    }
+    to{
+        text-shadow:
+            0 0 20px #fff,
+            0 0 50px #00eaff,
+            0 0 90px #ff00cc;
+    }
+}
+
+.musicExperience p{
+    margin-top:10px;
+    color:#ccc;
+}
+
+
+/* BIG GLOWING CIRCLE */
+
+.musicGlow{
+    position:absolute;
+    width:280px;
+    height:280px;
+    border-radius:50%;
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,0,204,.35),
+            rgba(0,234,255,.15),
+            transparent 70%
+        );
+    filter:blur(5px);
+    animation:musicPulse 1.5s infinite ease-in-out;
+    z-index:-1;
+}
+
+@keyframes musicPulse{
+    0%,100%{
+        transform:scale(.8);
+        opacity:.5;
+    }
+
+    50%{
+        transform:scale(1.4);
+        opacity:1;
+    }
+}
+
+
+/* FLOATING MUSIC NOTE */
+
+.musicNote{
+    font-size:7rem;
+    color:#fff;
+    text-shadow:
+        0 0 10px #fff,
+        0 0 30px #ff00cc,
+        0 0 60px #00eaff;
+    animation:noteFloat 2s infinite ease-in-out;
+}
+
+@keyframes noteFloat{
+    0%,100%{
+        transform:translateY(0) rotate(-8deg);
+    }
+
+    50%{
+        transform:translateY(-25px) rotate(8deg);
+    }
+}
+
+
+/* MAIN VISUALIZER */
+
+.visualizer{
+    width:min(700px,90%);
+    height:180px;
+    margin-top:40px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+}
+
+.visualizer span{
+    width:clamp(5px,1.5vw,12px);
+    height:40px;
+    border-radius:20px;
+
+    background:linear-gradient(
+        to top,
+        #ff00cc,
+        #00eaff,
+        #fff
+    );
+
+    box-shadow:
+        0 0 10px #ff00cc,
+        0 0 25px #00eaff;
+
+    animation:
+        visualizerDance
+        .8s
+        ease-in-out
+        infinite alternate;
+}
+
+.visualizer span:nth-child(1){animation-delay:.1s}
+.visualizer span:nth-child(2){animation-delay:.25s}
+.visualizer span:nth-child(3){animation-delay:.4s}
+.visualizer span:nth-child(4){animation-delay:.15s}
+.visualizer span:nth-child(5){animation-delay:.5s}
+.visualizer span:nth-child(6){animation-delay:.3s}
+.visualizer span:nth-child(7){animation-delay:.6s}
+.visualizer span:nth-child(8){animation-delay:.2s}
+.visualizer span:nth-child(9){animation-delay:.45s}
+.visualizer span:nth-child(10){animation-delay:.7s}
+.visualizer span:nth-child(11){animation-delay:.35s}
+.visualizer span:nth-child(12){animation-delay:.55s}
+.visualizer span:nth-child(13){animation-delay:.15s}
+.visualizer span:nth-child(14){animation-delay:.4s}
+.visualizer span:nth-child(15){animation-delay:.65s}
+
+@keyframes visualizerDance{
+    from{
+        height:15px;
+        transform:scaleY(.5);
+    }
+
+    to{
+        height:160px;
+        transform:scaleY(1);
+    }
+}
+
+
+/* BOTTOM EQUALIZER */
+
+.musicEqualizer{
+    display:flex;
+    gap:7px;
+    height:70px;
+    align-items:end;
+    margin-top:20px;
+}
+
+.musicEqualizer i{
+    display:block;
+    width:8px;
+    height:30px;
+    border-radius:10px;
+
+    background:#00eaff;
+
+    box-shadow:
+        0 0 10px #00eaff,
+        0 0 20px #00eaff;
+
+    animation:eq .6s infinite alternate;
+}
+
+.musicEqualizer i:nth-child(2){animation-delay:.1s}
+.musicEqualizer i:nth-child(3){animation-delay:.2s}
+.musicEqualizer i:nth-child(4){animation-delay:.3s}
+.musicEqualizer i:nth-child(5){animation-delay:.4s}
+.musicEqualizer i:nth-child(6){animation-delay:.5s}
+.musicEqualizer i:nth-child(7){animation-delay:.2s}
+.musicEqualizer i:nth-child(8){animation-delay:.4s}
+.musicEqualizer i:nth-child(9){animation-delay:.1s}
+.musicEqualizer i:nth-child(10){animation-delay:.3s}
+
+@keyframes eq{
+    from{
+        height:10px;
+    }
+
+    to{
+        height:65px;
+    }
+}
+
+.musicMessage{
+    margin-top:25px;
+    color:#aaa;
+    font-size:.9rem;
+    letter-spacing:2px;
+}
+
+
+/* MOBILE */
+
+@media(max-width:500px){
+
+    .musicIcon{
+        font-size:4rem;
+    }
+
+    .musicNote{
+        font-size:5rem;
+    }
+
+    .visualizer{
+        height:130px;
+        gap:5px;
+    }
+
+    .visualizer span{
+        width:6px;
+    }
+
+    @keyframes visualizerDance{
+        from{
+            height:10px;
+        }
+
+        to{
+            height:110px;
+        }
+    }
+
+}
 
 </style>
 </head>
@@ -531,6 +857,10 @@ button:hover{
 <audio id="music4" loop>
     <source src="music3.mp3" type="audio/mpeg">
 </audio>
+   
+   <audio id="music5">
+    <source src="music5.mp3" type="audio/mpeg">
+   </audio>
 
 
 <!-- ================= SCREEN 1 ================= -->
@@ -946,6 +1276,105 @@ button:hover{
     </div>
 
 </section>
+   <!-- ================= SCREEN 11 : MUSIC WARNING ================= -->
+
+<section class="screen" id="screen11">
+
+    <div class="musicIntro">
+
+        <div class="musicIcon">
+            🎧
+        </div>
+
+        <h1 class="musicTitle">
+            LET'S HAVE SOME MUSIC 🎶
+        </h1>
+
+        <p class="musicText">
+            Ab aage jo hone wala hai...<br>
+            usse bina music ke feel karna<br>
+            allowed nahi hai 😌✨
+        </p>
+
+        <div class="headphoneBox">
+            🎧 Headphones ya Speaker connect kar lo
+            <br>
+            <span>
+                Volume thoda badha lena 🔊
+            </span>
+        </div>
+
+        <button onclick="startMusicExperience()">
+            I'M READY 🎵
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SCREEN 12 : MUSIC EXPERIENCE ================= -->
+
+<section class="screen" id="screen12">
+
+    <div class="musicExperience">
+
+        <div class="musicGlow"></div>
+
+        <div class="musicNote">
+            ♪
+        </div>
+
+        <h1>
+            FEEL THE MUSIC
+        </h1>
+
+        <p>
+            🎧 Turn up the volume 🎧
+        </p>
+
+        <div class="visualizer" id="visualizer">
+
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+
+        </div>
+
+        <div class="musicEqualizer">
+
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+            <i></i>
+
+        </div>
+
+        <div class="musicMessage">
+            ✨ Something special is playing... ✨
+        </div>
+
+    </div>
+
+</section>
 
 
 <script>
@@ -958,7 +1387,8 @@ const musics = {
     1: document.getElementById("music1"),
     2: document.getElementById("music2"),
     3: document.getElementById("music3"),
-    4: document.getElementById("music4")
+    4: document.getElementById("music4"),
+    5: document.getElementById("music5")
 };
 
 function playMusic(number){
@@ -1013,6 +1443,15 @@ function goTo(number,musicNumber){
         startFinalCelebration();
         playMusic(4);
     }
+   if(number === 11){
+
+    // Screen 11 par koi music nahi
+    Object.values(musics).forEach(audio=>{
+        audio.pause();
+        audio.currentTime = 0;
+    });
+
+   }
 }
 
 
@@ -1512,7 +1951,7 @@ function checkCode(){
             "#00ff99";
 
         setTimeout(()=>{
-            goTo(10,4);
+            goTo(11);
         },1200);
 
     }else{
