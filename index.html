@@ -163,52 +163,7 @@ button:hover{
 }
    
    
-/* ================= PASSWORD SCREEN ================= */
 
-<section class="screen active" id="passwordScreen">
-
-    <div class="content">
-
-        <div class="passwordBox">
-
-            <div class="passwordLock">
-                🔐
-            </div>
-
-            <h2 class="neon">
-                SURPRISE LOCKED
-            </h2>
-
-            <p>
-                Pehle secret password enter karo... 👀
-            </p>
-
-            <input
-                id="passwordInput"
-                class="passwordInput"
-                type="password"
-                placeholder="ENTER PASSWORD"
-                autocomplete="off"
-                onkeydown="if(event.key==='Enter') checkPassword()"
-            >
-
-            <br>
-
-            <button onclick="checkPassword()">
-                UNLOCK ✨
-            </button>
-
-            <p id="passwordMessage" class="passwordMessage"></p>
-
-            <p class="small">
-                Hint: Password sirf special person ko pata hai 😈
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
    
 /* ================= SCREEN 1 ================= */
 
@@ -931,6 +886,53 @@ button:hover{
 </head>
 
 <body>
+   
+<!-- ================= PASSWORD SCREEN ================= -->
+
+<section class="screen active" id="passwordScreen">
+
+    <div class="content">
+
+        <div class="passwordBox">
+
+            <div class="passwordLock">
+                🔐
+            </div>
+
+            <h2 class="neon">
+                SURPRISE LOCKED
+            </h2>
+
+            <p>
+                Pehle secret password enter karo... 👀
+            </p>
+
+            <input
+                id="passwordInput"
+                class="passwordInput"
+                type="password"
+                placeholder="ENTER PASSWORD"
+                autocomplete="off"
+                onkeydown="if(event.key==='Enter') checkPassword()"
+            >
+
+            <br>
+
+            <button onclick="checkPassword()">
+                UNLOCK ✨
+            </button>
+
+            <p id="passwordMessage" class="passwordMessage"></p>
+
+            <p class="small">
+                Hint: Password sirf special person ko pata hai 😈
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
 
 <!-- MUSIC -->
 <audio id="music1" loop>
