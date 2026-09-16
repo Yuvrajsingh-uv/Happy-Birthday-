@@ -1507,35 +1507,26 @@ function checkPassword(){
     const input = document.getElementById("passwordInput");
     const message = document.getElementById("passwordMessage");
 
-    if(!input || !message){
-        alert("Password screen ka HTML ID nahi mil raha!");
-        return;
-    }
-
     const password = input.value.trim();
 
     if(password === "uv"){
 
-        message.innerHTML = "🔓 ACCESS GRANTED! Welcome... ❤️";
+        message.innerHTML =
+            "🔓 ACCESS GRANTED! Welcome... ❤️";
+
         message.style.color = "#00ff99";
 
         input.disabled = true;
 
         setTimeout(function(){
 
-            const passwordScreen =
-                document.getElementById("passwordScreen");
+            document
+                .getElementById("passwordScreen")
+                .classList.remove("active");
 
-            const screen1 =
-                document.getElementById("screen1");
-
-            if(passwordScreen){
-                passwordScreen.classList.remove("active");
-            }
-
-            if(screen1){
-                screen1.classList.add("active");
-            }
+            document
+                .getElementById("screen1")
+                .classList.add("active");
 
             createBackgroundHearts();
 
