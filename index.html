@@ -2308,5 +2308,43 @@ document.addEventListener('dragstart', function(e) {
   e.preventDefault();
 });
 </script>
+   <script>
+document.addEventListener("DOMContentLoaded", function(){
+
+    const input = document.getElementById("passwordInput");
+    const button = document.querySelector("#passwordScreen button");
+
+    function unlock(){
+
+        if(input.value.trim().toLowerCase() === "uv"){
+
+            document.getElementById("passwordScreen")
+                .classList.remove("active");
+
+            document.getElementById("screen1")
+                .classList.add("active");
+
+        }else{
+
+            const msg = document.getElementById("passwordMessage");
+
+            msg.innerHTML = "❌ Wrong password... Try again 😈";
+            msg.style.color = "#ff5555";
+
+            input.value = "";
+            input.focus();
+        }
+    }
+
+    button.onclick = unlock;
+
+    input.onkeydown = function(e){
+        if(e.key === "Enter"){
+            unlock();
+        }
+    };
+
+});
+   </script>
 </body>
 </html>
